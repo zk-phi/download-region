@@ -1,4 +1,4 @@
-;;; download-region.el --- simple in-buffer download manager for Emacs
+;;; download-region.el --- Simple in-buffer download manager
 
 ;; Copyright (C) 2013 zk_phi
 
