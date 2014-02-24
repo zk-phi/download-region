@@ -216,7 +216,11 @@ download it to the same directory as the last download."
 (defun download-region-cancel (beg end)
   "cancel all downloads in the region."
   (interactive "r")
-  (mapc 'dlrgn/cancel-download (overlays-in beg end)))
+  (let (dls)
+    (while (setq dls
+                 (dlrgn/filter (lambda (ov) (overlay-get ov 'dlrgn/newname))
+                               (overlays-in beg end)))
+      (mapc 'dlrgn/cancel-download dls))))
 
 ;; + kill-buffer query
 
