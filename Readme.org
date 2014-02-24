@@ -1,0 +1,36 @@
+* download-region.el
+
+simple in-buffer download manager for Emacs
+
+バッファ内で動作する簡易ダウンローダ
+
+** Screencast
+
+[[screencast.gif]]
+
+** Usage
+
+Put download-region.el in a "load-path"ed directory, and require this
+script.
+
+: (require 'download-region)
+
+then two commands below are available.
+
+- download-region-as-url
+
+  Download selected URL, to a specific directory.
+
+- download-region-cancel
+
+  Cancel all downloads in the region. For more details, see "Readme".
+
+** Customization
+
+With the variable =download-region-max-downloads=, you can limit the
+number of downloads at a time.
+
+: (setq download-region-max-downloads 5)
+
+You can modify the face =download-region-downloading= so that downloads
+look more pretty in your color scheme.
