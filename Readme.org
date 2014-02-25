@@ -23,14 +23,14 @@ then two commands below are available.
 
 - download-region-cancel
 
-  Cancel all downloads in the region. For more details, see "Readme".
+  Cancel all downloads in the region.
 
 ** Customization
 
-With the variable =download-region-max-downloads=, you can limit the
-number of downloads at a time.
+When =download-region-max-downloads= is set, the number of downloads
+is limited.
 
 : (setq download-region-max-downloads 5)
 
-You can modify the face =download-region-downloading= so that downloads
+You can modify =download-region-downloading= face so that downloads
 look more pretty in your color scheme.
