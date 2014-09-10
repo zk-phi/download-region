@@ -61,11 +61,9 @@
   "maximum number of downloads."
   :group 'download-region)
 
-;; + faces
-
-(make-face 'download-region-downloading)
-(set-face-attribute 'download-region-downloading nil
-                    :background "#194854")
+(defface download-region-downloading '((t (:background "#194854")))
+  "Face used to show download objects."
+  :group 'download-region)
 
 ;; + utilities
 
