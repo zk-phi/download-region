@@ -94,14 +94,10 @@
 (defvar dlrgn/last-dir nil)
 
 (defun dlrgn/make-download (beg end newname)
-  (let ((ov (make-overlay beg end)))
+  (let ((ov (make-overlay beg end nil t)))
     (overlay-put ov 'dlrgn/newname newname)
     (overlay-put ov 'face 'download-region-downloading)
     (overlay-put ov 'intangible t)
-    ;; do not expand overlay on insertion
-    (overlay-put ov 'insert-in-front-hooks
-                 '((lambda (ov afterp beg end &rest _)
-                     (move-overlay ov end (overlay-end ov)))))
     ;; cancel download on delete
     (overlay-put ov 'modification-hooks
                  '((lambda (ov afterp &rest _)
