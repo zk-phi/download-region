@@ -189,7 +189,7 @@
   "download region as url. when a prefix-argument is given,
 download it to the same directory as the last download."
   (interactive "P")
-  (unless (use-region-p) (error "There is no region."))
+  (unless mark-active (error "There is no region."))
   (let* ((beg (region-beginning))
          (end (region-end))
          (url (buffer-substring-no-properties beg end))
