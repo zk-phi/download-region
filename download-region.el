@@ -199,7 +199,8 @@ download it to the same directory as the last download."
                          "download to :"
                          (or dlrgn/last-dir default-directory)))))
          (_ (when (not (file-exists-p dir)) (make-directory dir t)))
-         (file (url-unhex-string (car (last (split-string url "/" t)))))
+         (file (convert-standard-filename
+                (url-unhex-string (car (last (split-string url "/" t))))))
          (newname (concat dir file))
          (newname (or (and (file-exists-p newname)
                            (not (y-or-n-p "file already exists. overwrite?"))
