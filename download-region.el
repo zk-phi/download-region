@@ -48,6 +48,7 @@
 (require 'mm-decode)
 (require 'cl-lib)
 (require 'url)
+(require 'thingatpt)
 
 (defconst download-region-version "1.0.0")
 
@@ -189,9 +190,13 @@
   "download region as url. when a prefix-argument is given,
 download it to the same directory as the last download."
   (interactive "P")
-  (unless mark-active (error "There is no region."))
-  (let* ((beg (region-beginning))
-         (end (region-end))
+  (let* ((bounds (cond
+                  ((use-region-p)
+                   (cons (region-beginning) (region-end)))
+                  ((thing-at-point-bounds-of-url-at-point))
+                  (t (error "There is no region."))))
+         (beg (car bounds))
+         (end (cdr bounds))
          (url (buffer-substring-no-properties beg end))
          (dir (setq dlrgn/last-dir
                     (or (and use-last-dir dlrgn/last-dir)
