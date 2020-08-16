@@ -18,8 +18,8 @@
 
 ;; Author: zk_phi
 ;; URL: http://zk-phi.github.io/
-;; Version: 1.0.1
-;; Package-Requires: ((cl-lib "0.3") (emacs "26.1"))
+;; Version: 1.0.0
+;; Package-Requires: ((cl-lib "0.3"))
 
 ;;; Commentary:
 
@@ -42,7 +42,6 @@
 ;;; Change Log:
 
 ;; 1.0.0 first released
-;; 1.0.1 prefer mapcan over mapcar (requires emacs 26.1 or later)
 
 ;;; Code:
 
@@ -51,7 +50,7 @@
 (require 'url)
 (require 'thingatpt)
 
-(defconst download-region-version "1.0.1")
+(defconst download-region-version "1.0.0")
 
 ;; + customs
 
@@ -70,8 +69,8 @@
 
 ;; + utilities
 
-(defun dlrgn/filter! (pred lst)
-  (delq nil (mapcan (lambda (x) (and (funcall pred x) x)) lst)))
+(defun dlrgn/filter (pred lst)
+  (delq nil (mapcar (lambda (x) (and (funcall pred x) x)) lst)))
 
 (defun dlrgn/remove-from-list (lstvar elem)
   (cl-labels ((dlrgn/remove (lst elem)
@@ -221,15 +220,15 @@ download it to the same directory as the last download."
   (interactive "r")
   (let (dls)
     (while (setq dls
-                 (dlrgn/filter! (lambda (ov) (overlay-get ov 'dlrgn/newname))
-                                (overlays-in beg end)))
+                 (dlrgn/filter (lambda (ov) (overlay-get ov 'dlrgn/newname))
+                               (overlays-in beg end)))
       (mapc 'dlrgn/cancel-download dls))))
 
 ;; + kill-buffer query
 
 (push (lambda ()
-        (let ((dls (dlrgn/filter! (lambda (ov) (overlay-get ov 'dlrgn/newname))
-                                  (overlays-in 1 (1+ (buffer-size))))))
+        (let ((dls (dlrgn/filter (lambda (ov) (overlay-get ov 'dlrgn/newname))
+                                 (overlays-in 1 (1+ (buffer-size))))))
           (or (null dls)
               (and (y-or-n-p "Cancel all downloads in this buffer ?")
                    (progn (mapc 'dlrgn/cancel-download dls) t)))))
