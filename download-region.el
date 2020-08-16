@@ -60,6 +60,7 @@
 
 (defcustom download-region-max-downloads 5
   "maximum number of downloads."
+  :type 'integer
   :group 'download-region)
 
 (defface download-region-downloading '((t (:background "#194854")))
