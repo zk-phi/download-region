@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;;; download-region.el --- Simple in-buffer download manager
 
 ;; Copyright (C) 2013-2015 zk_phi
